@@ -37,15 +37,12 @@ def get_filename(text):
         return text
 
 def save_snapshot(driver, word, idx):
-    # fname = os.path.join(Options.dir, "%s.png" % get_filename(Options.prefix + word))
     fname = os.path.join(Options.dir, "%s.jpg" % get_filename(Options.prefix + word))
     idx = "%03d" % (idx + 1)
 
     if os.path.isfile(fname) and (not Options.force_save):
         print("  ! %s: %s exists!" % (idx, fname))
         return
-
-    time.sleep(1)
 
     url_template = Engines[Options.engine]
     driver.get(url_template % word)
@@ -56,22 +53,12 @@ def save_snapshot(driver, word, idx):
 
     driver.execute_script("document.body.style.overflow = 'hidden';")
 
-    # driver.save_screenshot(fname)
+    # See: https://gist.github.com/jsok/9502024
     screen = driver.get_screenshot_as_png()
     image = Image.open(StringIO.StringIO(screen))
     image.convert("RGB").save(fname, 'JPEG', optimize=True)
     print("  %s %s: %s" % (u'\u2713', idx, fname))
-
-# https://gist.github.com/jsok/9502024
-def optimize(driver):
-    screen = driver.get_screenshot_as_png()
-    (screen_width, screen_height) = Options.window.split("x")
-
-    # Crop it back to the window size (it may be taller)
-    image = Image.open(StringIO.StringIO(screen))
-    box = (0, 0, screen_width, screen_height)
-    region = image.crop(box)
-    region.save('screen_lores.jpg', 'JPEG', optimize=True, quality=95)
+    time.sleep(1)
 
 def get_words_from_file(fname):
     with open(fname) as f:
