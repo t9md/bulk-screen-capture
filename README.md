@@ -25,8 +25,9 @@ bulk screen capture script intended to use for Anki.
 Shell から `chromedriver -h` と打って、help が出たらOK
 
 - selenium と pillow の install
-```
-pip install selenium pillow
+
+```sh
+$ pip install selenium pillow
 ```
 
 ## 使い方
@@ -36,7 +37,7 @@ pip install selenium pillow
 
 ヘルプを見て使えるオプションを確認。オプションを試行錯誤する場合は `--show` オプションでブラウザを表示しておくと便利
 
-```python
+```sh
 $ python bulk-screen-capture.py -h
 ```
 
