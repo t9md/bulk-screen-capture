@@ -100,12 +100,12 @@ def main():
 
     parser = OptionParser(usage=usage)
     parser.add_option("-d", "--dir", dest="dir", help="Directory to write captured images.", default="slideshow/imgs")
-    # parser.add_option("-j", "--js-before-save", dest="js_before_save", help="Eval js before save mainly to scroll to element", default=scroll_to_first_image_of_google)
     parser.add_option("-j", "--js-before-save", dest="js_before_save", help="Eval js file before save mainly to scroll to element", default="")
     parser.add_option("-f", "--force-save", action="store_true", dest="force_save", help="Overwrite existing file if exists", default=False)
     parser.add_option("-p", "--prefix", dest="prefix", help="Prefix for filename", default="")
     parser.add_option("-w", "--window", dest="window", help="Window size. 1280x720 by default.", default="1280x720")
     parser.add_option("-e", "--engine", dest="engine", help="Image search engine to use one of %s" % Engines.keys(), default="google")
+    parser.add_option("-s", "--show", action="store_true", dest="show", help="Do not hide chrome browser", default=False)
     (Options, args) = parser.parse_args()
 
     if Options.engine not in Engines:
@@ -113,7 +113,8 @@ def main():
         exit(1)
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
+    if not Options.show:
+        chrome_options.add_argument('--headless')
     chrome_options.add_argument('--hide-scrollbars')
     driver = webdriver.Chrome(options=chrome_options)
 
