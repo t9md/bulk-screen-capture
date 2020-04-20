@@ -58,7 +58,7 @@ def save_snapshot(driver, word, idx):
     image = Image.open(StringIO.StringIO(screen))
     image.convert("RGB").save(fname, 'JPEG', optimize=True)
     print("  %s %s: %s" % (u'\u2713', idx, fname))
-    time.sleep(1)
+    time.sleep(Options.sleep)
 
 def get_words_from_file(fname):
     with open(fname) as f:
@@ -93,6 +93,7 @@ def main():
     parser.add_option("-w", "--window", dest="window", help="Window size. 1280x720 by default.", default="1280x720")
     parser.add_option("-e", "--engine", dest="engine", help="Image search engine to use one of %s" % Engines.keys(), default="google")
     parser.add_option("-s", "--show", action="store_true", dest="show", help="Do not hide chrome browser", default=False)
+    parser.add_option("--sleep", dest="sleep", type="float", help="Sleep duration on each take", default=1.0)
     (Options, args) = parser.parse_args()
 
     if Options.engine not in Engines:
