@@ -8,18 +8,20 @@
     * [Anki のデッキから画像を参照する](#anki-のデッキから画像を参照する)
 <!-- TOC END -->
 
-# bulk-screen-capture
+# これは何？
 
 bulk screen capture script intended to use for Anki.
 
-## 最初に
+ファイルに書かれた、単語リストを読み取って、各単語を google イメージ検索で検索し、そのブラウザの画面毎キャプチャしファイルに保存するスクリプト。
+
+# 最初に
 
 - 作者は macOS に元々入っている Python 2.7.16 で動作確認しました。
 - Windows でも動くように出来るかも知れませんが、必要なら誰かやって下さい。
 - Python 3系でも動くように出来るかも知れませんが、必要なら誰かやって下さい。
 - 基本的に自分用なので細かいサポートはしません。自分で試行錯誤して頑張って下さい！
 
-## 前準備
+# 前準備
 
 - Chrome Browser を自動操縦するためのドライバ [Chrome driver](http://chromedriver.chromium.org/downloads) をダウンロードして、 PATH の通ったとこ(`/usr/local/bin` とか)に置く。
 Shell から `chromedriver -h` と打って、help が出たらOK
@@ -30,9 +32,9 @@ Shell から `chromedriver -h` と打って、help が出たらOK
 $ pip install selenium pillow
 ```
 
-## 使い方
+# 使い方
 
-### help
+## help を読もう
 
 
 ヘルプを見て使えるオプションを確認。オプションを試行錯誤する場合は `--show` オプションでブラウザを表示しておくと便利
@@ -41,7 +43,10 @@ $ pip install selenium pillow
 $ python bulk-screen-capture.py -h
 ```
 
-### 実践編
+## ファイルを与えて検索画面を一括キャプチャしよう
+
+- このスクリプトは 1つ検索する毎に、1秒間 sleep します。これは一気に連続でやると、bot と見做されて、 Googleから弾かれるようになるためです。
+- なので、1000単語なら 20分程度はかかります。パソコンがスリープしないようにするには、Amphetamine 等の、macを眠らせない常駐ソフトを利用すると良いです。
 
 ```python
 python bulk-screen-capture.py -d collection.media -p "google-img--" -j before_scroll.js -w 720x720 sample.tsv
@@ -68,7 +73,7 @@ catastrophic	壊滅的な、大異変の、最悪の
 <img style="border: 2px black solid;" src="./imgs/google-img--catastrophic.jpg" width="300">
 </p>
 
-### デフォルトの `before_scroll.js` は何をしているか？
+デフォルトの `before_scroll.js` は何をしているか？
 
 画面キャプチャを撮る前に良い感じの場所までスクロールさせている。
 
@@ -81,15 +86,15 @@ catastrophic	壊滅的な、大異変の、最悪の
 <img src="./imgs/Google_Search.png" width="600">
 </p>
 
-### Anki のデッキから画像を参照する
+## Anki のデッキから画像を参照する
 
-#### 1. 保存した画像を Anki のメディアファイルに置く
+### 1. 保存した画像を Anki のメディアファイルに置く
 
 置こう。置いていこう。
 画像サイズは、720x720 で SVL10, 11, 12の合計3000ファイルの総合計は 572MBだった。
 ※ SVLは各レベル1000単語
 
-#### 2. フィールドから画像を参照する
+### 2. フィールドから画像を参照する
 
 サンプルとして [add_img_field.rb](https://github.com/t9md/bulk-screen-capture/blob/master/add_img_field.rb) を置いてある。これは、第一フィールドが検索単語の tsv を読み込んで、末尾に画像への参照(`<img src=...`)フィールドを追加するスクリプト。各自工夫してやって下さい。
 
