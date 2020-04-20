@@ -76,7 +76,7 @@ def optimize(driver):
 def get_words_from_file(fname):
     with open(fname) as f:
         content = f.readlines()
-    content = [x.split("\t")[0] for x in content]
+    content = [x.split("\t")[0].rstrip() for x in content]
     return content
 
 def retrieve_snapshot_for_words(driver, words):
