@@ -1,6 +1,23 @@
+<!-- TOC START min:1 max:3 link:true asterisk:true update:true -->
+* [bulk-screen-capture](#bulk-screen-capture)
+  * [前準備](#前準備)
+  * [使い方](#使い方)
+    * [help](#help)
+    * [実践編](#実践編)
+    * [デフォルトの `before_scroll.js` は何をしているか？](#デフォルトの-before_scrolljs-は何をしているか)
+    * [Anki のデッキから画像を参照する](#anki-のデッキから画像を参照する)
+<!-- TOC END -->
+
 # bulk-screen-capture
 
 bulk screen capture script intended to use for Anki.
+
+## 最初に
+
+- 作者は macOS に元々入っている Python 2.7.16 で動作確認しました。
+- Windows でも動くように出来るかも知れませんが、必要なら誰かやって下さい。
+- Python 3系でも動くように出来るかも知れませんが、必要なら誰かやって下さい。
+- 基本的に自分用なので細かいサポートはしません。自分で試行錯誤して頑張って下さい！
 
 ## 前準備
 
@@ -63,18 +80,19 @@ catastrophic	壊滅的な、大異変の、最悪の
 <img src="./imgs/Google_Search.png" width="600">
 </p>
 
-### Anki への設定
+### Anki のデッキから画像を参照する
 
-1. 保存した画像を Anki のメディアファイルに置く
+#### 1. 保存した画像を Anki のメディアファイルに置く
 
 置こう。置いていこう。
 画像サイズは、720x720 で SVL10, 11, 12の合計3000ファイルの総合計は 572MBだった。
 ※ SVLは各レベル1000単語
 
-2. フィールドから画像を参照する
+#### 2. フィールドから画像を参照する
 
-以下は、最初のフィールドが単語の tsv の末尾に、画像ファイル名のフィールドを追加するサンプルのスクリプト。各自工夫してやってみて。
-ファイルを読み込んで、
+サンプルとして [add_img_field.rb](https://github.com/t9md/bulk-screen-capture/blob/master/add_img_field.rb) を置いてある。これは、第一フィールドが検索単語の tsv を読み込んで、末尾に画像への参照(`<img src=...`)フィールドを追加するスクリプト。各自工夫してやって下さい。
+
+使用例は以下
 ```sh
 $ cat sample.tsv
 tactic  戦術、戦法、作戦
@@ -88,7 +106,11 @@ catastrophic    壊滅的な、大異変の、最悪の      <img src="google-im
 $
 ```
 
+この tsv ファイルを読み込むときは、"Allow HTML in fields"を チェックすること
 
+<p>
+<img src="./imgs/anki-import-allow-html-in-fields.png" width="300">
+</p>
 
 
 3. モバイルデバイスに同期する
