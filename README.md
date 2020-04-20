@@ -43,9 +43,9 @@ catastrophic	壊滅的な、大異変の、最悪の
 ```
 
 <p>
-<img src="./imgs/google-img--tactic.jpg" width="300">
-<img src="./imgs/google-img--backfire.jpg" width="300">
-<img src="./imgs/google-img--catastrophic.jpg" width="300">
+<img border="1" src="./imgs/google-img--tactic.jpg" width="300">
+<img border="1" src="./imgs/google-img--backfire.jpg" width="300">
+<img border="1" src="./imgs/google-img--catastrophic.jpg" width="300">
 </p>
 
 ### デフォルトの `before_scroll.js` は何をしているか？
