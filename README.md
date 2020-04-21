@@ -1,4 +1,4 @@
-English README is [here](https://github.com/t9md/bulk-screen-capture/README-en.md).
+English README is [here](https://github.com/t9md/bulk-screen-capture/blob/master/README-en.md).
 
 <!-- TOC START min:1 max:3 link:true asterisk:true update:true -->
 * [これは何？](#これは何)
